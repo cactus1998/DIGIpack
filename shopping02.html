@@ -1,0 +1,456 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  
+ <style>
+/* 每一個響應式斷點都會設置一個 max-width */
+    .swiper-container {
+      width: 100%;
+      height: calc(100vh - 92px);
+    }
+    p{
+      color:rgb(102, 102, 102);
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* background-image: url('https://dummyimage.com/1920x1080'); */
+      background-color: blue;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .swiper-slide:nth-child(2n+1) {
+      background-color: darkblue;
+
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    @media(max-width:767px) {
+
+      .swiper-container {
+        width: 100%;
+        height: 70vw;
+      }
+    }
+    * {
+    transition: .3s;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  @media(max-width:767px) {
+    .logo {
+      height: 45px;
+    }
+  }
+
+  @media(max-width:575px) {
+    .logo {
+      height: 30px;
+    }
+  }
+
+  </style>
+
+</head>
+<body x-data="{ open: false }">
+  <!-- header設定 -->
+  <header class=" body-font">
+    <div class="w-full  bg-white dark-mode: dark-mode:bg-blue-800">
+        <div
+        class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+        <div class="p-4 flex flex-row items-center justify-between">
+            <a href="#"
+            class="text-lg  tracking-widest  uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"><img
+                class="logo" src="./img/logo.svg" alt=""></a>
+            <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open" >
+              <!-- 縮小後的漢堡條視窗 -->
+              <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                <path x-show="!open" fill-rule="evenodd"d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"clip-rule="evenodd"></path>
+                <path x-show="open" fill-rule="evenodd"d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <nav :class="{'flex': open, 'hidden': !open}"
+            class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+            <a class="px-4 py-2 mt-2 flex justify-center items-center hover:bg-blue"
+            href="#">Blog</a>
+            <a class="px-4 py-2 mt-2 text-sm flex justify-center items-center  hover:bg-blue"
+            href="#">Portfolio</a>
+            <a class="px-4 py-2 mt-2 text-sm flex justify-center items-center  hover:bg-blue"
+            href="#">About</a>
+            <a class="px-4 py-2 mt-2  flex justify-center items-center  hover:bg-blue"
+            href="#">Contact</a>
+            <!-- 按鈕到shopping -->
+            <div class="flex justify-center items-center relative">
+            <a class="px-3 md:px-1 py-2 mt-2 text-2xl flex justify-center mr-3"
+                href="./shopping.html"><i class="fas fa-shopping-cart"></i></a>
+            <div @click.away="drop = false" class="" x-data="{ drop: false }">
+              <button
+              @click="drop = !drop"
+              class="flex flex-row justify-center items-center w-full px-3 md:px-1 py-2 mt-2 ">
+              <span class="text-3xl"><i class="fas fa-user-circle "></i></span>
+              </button>
+            <!-- 按鈕到login -->
+            <div x-show="drop" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48 z-10">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-blue-800">
+              <a class="block px-4 py-2 mt-2 text-sm  font-semibold bg-transparent rounded-lg md:mt-0 hover: focus: hover:bg-blue focus:bg-blue focus:outline-none focus:shadow-outline"
+                href="./login.html">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+</header>
+
+<main>
+  <section class="body-font bg-gray-300 py-12">
+      <div class="max-w-md mx-auto bg-gray-100 shadow-lg rounded-md md:max-w-5xl">
+        <div class="md:flex">
+          <div class="w-full p-10">
+            <div class="md:grid md:grid-cols-2 gap-2 ">
+              <div class="col-span-2">
+                <h1 class="text-3xl font-bold">購物車</h1>
+
+                <!-- 購物進度條 -->
+                <div class="w-full py-6 flex">
+                  <!-- 購物車1/4 -->
+                  <div class="w-1/4">
+                    <div class="relative mb-2">                       
+                      <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-2xl flex items-center">
+                          <span class="text-center text-white w-full">
+                              1
+                          </span>
+                      </div>
+                      <div class="absolute" style="width: calc(100% - 3.5rem); top: 50%;left: 55px; transform: translate(50%, -50%)">
+                          <div class="w-full bg-gray-200 items-center align-middle align-center flex-1">
+                              <div class="w-0 bg-green-300 py-1 rounded"style="width:100%;"></div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="text-xs text-center md:text-base">確認購物車</div>
+                  </div>
+                  <!-- 購物車2/4 -->
+                  <div class="w-1/4">
+                    <div class="relative mb-2">
+                        <div class="w-10 h-10 mx-auto bg-green-500 rounded-full text-2xl text-white flex items-center">
+                            <span class="text-center text-white-600 w-full">
+                                2
+                            </span>
+                        </div>
+                        <div class="absolute" style="width: calc(100% - 3.5rem); top: 50%;left: 55px; transform: translate(50%, -50%)">
+                          <div class="w-full bg-gray-200 items-center align-middle align-center flex-1">
+                              <div class="w-0 bg-green-300 py-1 rounded"style="width: 50%;"></div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="text-xs text-center md:text-base">付款與運送方式</div>
+                  </div>
+                  <!-- 購物車3/4 -->
+                  <div class="w-1/4">
+                    <div class="relative mb-2">
+                      <div class="w-10 h-10 mx-auto bg-white rounded-full text-lg flex items-center">
+                          <span class="text-center text-gray-600 w-full">
+                              3
+                          </span>
+                      </div>
+                      <div class="absolute" style="width: calc(100% - 3.5rem); top: 50%;left: 55px; transform: translate(50%, -50%)">
+                        <div class="w-full bg-gray-200 items-center align-middle align-center flex-1">
+                            <div class="w-0 bg-gray-300 py-1 rounded"style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="text-xs text-center md:text-base">填寫資料</div>
+                  </div>
+                  <!-- 購物車4/4 -->
+                  <div class="w-1/4">
+                    <div class="relative mb-2">
+                      <div class="w-10 h-10 mx-auto bg-white rounded-full text-lg text-white flex items-center">
+                          <span class="text-center text-gray-600 w-full">
+                              4
+                          </span>
+                      </div>
+                    </div>
+                    <div class="text-xs text-center md:text-base">完成訂購</div>
+                  </div>
+                </div>
+                <!-- 訂單明細 -->
+                <!-- border-t那條細線區隔 -->
+                <div class="border-t w-full pt-5">
+                <!-- 付款方式 -->
+                <div class="flex flex-col mt-0 pt-6">
+                    <span class="text-gray-700 text-2xl">付款方式</span>
+                    <div class="mt-2 flex flex-col">
+                        <label class="items-center ml-6 py-5">
+                            <input type="radio" class="form-radio" name="radio" value="personal">
+                            <span class="ml-2 text-xl">信用卡付款</span>
+                        </label>
+                        <label class="items-center ml-6 py-5">
+                            <input type="radio" class="form-radio" name="radio" value="busines">
+                            <span class="ml-2 text-xl">網路 ATM</span>
+                        </label>
+                        <label class="items-center ml-6 py-5">
+                            <input type="radio" class="form-radio" name="radio" value="busines">
+                            <span class="ml-2 text-xl">超商代碼</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- 運送方式 -->
+                <div class="flex flex-col mt-6 pt-6 border-t">
+                    <span class="text-gray-700 text-2xl">運送方式</span>
+                    <div class="mt-2 flex flex-col">
+                        <label class="items-center ml-6 py-5">
+                            <input type="radio" class="form-radio" name="radio" value="personal">
+                            <span class="ml-2 text-xl">黑貓宅配</span>
+                        </label>
+                        <label class="items-center ml-6 py-5">
+                            <input type="radio" class="form-radio" name="radio" value="busines">
+                            <span class="ml-2 text-xl">超商店到店</span>
+                        </label>
+                    </div>
+                </div>
+
+                    <!-- 計費 -->
+                    <!-- flex-col垂直排列 -->
+                    <div class="flex flex-col items-end mt-5 pt-5 border-t">
+                      <div class="w-1/4 flex justify-between items-center ">
+                          <span class="text-sm text-gray-400">數量:</span>
+                          <span class="text-lg font-bold text-gray-800">3</span>
+                      </div>
+                      <div class="w-1/4 flex justify-between items-center ">
+                        <span class="text-sm text-gray-400">小計:</span>
+                        <span class="text-lg font-bold text-gray-800">$24.90</span>
+                      </div>
+                      <div class="w-1/4 flex justify-between items-center ">
+                        <span class="text-sm text-gray-400">運費:</span>
+                        <span class="text-lg font-bold text-gray-800">$24.90</span>
+                      </div>
+                      <div class="w-1/4 flex justify-between items-center ">
+                        <span class="text-sm text-gray-400">統計:</span>
+                        <span class="text-lg font-bold text-gray-800">$24.90</span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center mt-6 pt-6 border-t">
+                        <button class="h-12 w-auto px-12 bg-white border-2 border-blue-500 rounded focus:outline-none text-blue-500 hover:bg-blue-600" onclick="location.href='./shopping03.html'">
+                            上一步</button>
+                        <button class="h-12 w-auto px-12 bg-blue-500 rounded focus:outline-none text-white hover:bg-blue-600" onclick="location.href='./shopping03.html'">
+                            下一步</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+  <!-- 大標題 footer   -->
+  <footer class="text-gray body-font">
+    <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+          <!-- 數位方塊圖片 -->
+          <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: #1a2b57;
+                }
+
+                .cls-2 {
+                  fill: #fff;
+                }
+              </style>
+            </defs>
+            <title>資產 2</title>
+            <g id="圖層_2" data-name="圖層 2">
+              <g id="圖層_1-2" data-name="圖層 1">
+                <circle class="cls-1" cx="20" cy="20" r="20" />
+                <path class="cls-2"
+                  d="M20,7l7.13,4.11a7.91,7.91,0,0,1,3.95,6.84v6.8l-8.61-5V18.32l7.37,4.26V18.63a7.89,7.89,0,0,0-3.95-6.85L21.28,9.1V33.25L9,26.14V13.35l5.89,3.4a7.91,7.91,0,0,1,3.95,6.85v4.76l-1.23-.71V24.31a7.92,7.92,0,0,0-4-6.85l-3.42-2v9.94L20,31.11Z" />
+              </g>
+            </g>
+          </svg>
+          <span class="ml-2 text-xl">數位方塊</span>
+        </a>
+        <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+      </div>
+      <div class="flex flex-grow flex-wrap md:p1-20 -mb-10 md:mt-0 md:text-left text-center">
+        <!-- 4個段落都相同 -->
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray hover:text-gray-800">First Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Second Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Third Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Fourth Link</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray hover:text-gray-800">First Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Second Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Third Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Fourth Link</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray hover:text-gray-800">First Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Second Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Third Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Fourth Link</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray hover:text-gray-800">First Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Second Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Third Link</a>
+            </li>
+            <li>
+              <a class="text-gray hover:text-gray-800">Fourth Link</a>
+            </li>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- 最下面那排 -->
+    <div class="bg-gray-100">
+      <div class="container mx-auto py-4 px-5 flex">
+        <!-- 這邊再加上sm:text-left推到左邊 -->
+        <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
+          <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray ml-1"
+            target="_blank">@knyttneve</a>
+        </p>
+        <!-- 4個標記 -->
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+          <!-- FB -->
+          <a class="text-gray-500">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+              viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg>
+          </a>
+          <!-- 推特 -->
+          <a class="ml-3 text-gray-500">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+              viewBox="0 0 24 24">
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+              </path>
+            </svg>
+          </a>
+          <!-- 唯信 -->
+          <a class="ml-3 text-gray-500">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a>
+          <!-- in -->
+          <a class="ml-3 text-gray-500">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+              <path stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./js/tailwind.config.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        cssMode: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        mousewheel: true,
+        keyboard: true,
+      });
+    </script>
+</body>
+
+</html>

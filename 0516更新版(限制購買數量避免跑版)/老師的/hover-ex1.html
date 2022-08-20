@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+
+        .box1.hvr-rectangle-out:before {
+            background: red;
+            opacity: 0.5;
+        }
+
+        .hvr-underline-from-center:before {
+            background: blueviolet;
+            height: 20px;
+        }
+
+        .hvr-curl-bottom-left:hover:before {
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box box1 hvr-wobble-to-bottom-right"></div>
+    <br><br>
+    <div class="box  hvr-rectangle-out"></div>
+    <br><br>
+    <a href="#" class="box hvr-icon-forward">
+        Icon Forward
+        <i class="fa fa-chevron-circle-right hvr-icon"></i>
+    </a>
+
+
+    <br><br>
+    <a href="#" class="box hvr-icon-spin">
+        Icon Spin
+        <img src="./img/deerlogo2.png" class="hvr-icon" />
+    </a>
+    <br><br>
+    <div class="box box3 hvr-underline-from-center"></div>
+    <br><br>
+    <div class="box box3 hvr-curl-bottom-left"></div>
+</body>
+
+</html>
